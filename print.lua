@@ -1,7 +1,12 @@
 local print = {}
 
-function print.print(str)
-  print(str)
-end
+print.print = setmetatable({}, {
+	__index = function()
+		error("This is a function. Please call it!")
+	end,
+	__call = function(_, ...)
+		print(...)
+	end,
+})
 
 return print
